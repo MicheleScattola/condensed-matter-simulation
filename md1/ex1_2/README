@@ -1,0 +1,6 @@
+MD dynamics of spring chain with Verlet integrator
+
+set xlabel 't [ps]'
+set ylabel 'E_{TOT} [meV]
+set title 'Energy conservation with different timesteps'
+p 'out2.dat' u 1:4 w l t 'Delta t = 10^{-2}' enhanced,'out3.dat' u 1:4 w l t 'Delta t = 10^{-3}', 'out4.dat' u 1:4 w l t 'Delta t = 10^{-4}' 

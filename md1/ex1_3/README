@@ -1,0 +1,3 @@
+MD dynamics of spring chain: comparison Euler VS Verlet integrator
+
+p 'verlet.dat' u 1:4 w l t 'E_{TOT} Verlet','euler.dat' u 1:4 w l t 'E_{TOT} Euler'
