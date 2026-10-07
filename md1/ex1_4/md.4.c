@@ -184,7 +184,6 @@ void Verlet_integrator(){
 
 void velocity_verlet(){
 	int i;
-	static int once=1;
 	
 	calc_forces(); // update the forces
 
