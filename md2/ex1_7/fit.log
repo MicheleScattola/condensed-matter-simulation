@@ -1,0 +1,108 @@
+
+
+*******************************************************************************
+Thu Oct  8 09:19:32 2026
+
+
+FIT:    data read from '3Dout1.dat' u 1:5
+        format = x:z
+        x range restricted to [0.00000 : 15.0000]
+        #datapoints = 151
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*exp(b*x)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 4.3590543551e+04   0.00e+00  2.38e+00    2.000000e+01  -2.000000e+00
+  20 7.7124836405e+02  -4.42e-01  2.38e-03    2.678085e+01  -6.742099e-02
+
+After 20 iterations the fit converged.
+final sum of squares of residuals : 771.248
+rel. change during last iteration : -4.42175e-06
+
+degrees of freedom    (FIT_NDF)                        : 149
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.27512
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.17616
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 26.7809          +/- 0.4609       (1.721%)
+b               = -0.067421        +/- 0.002668     (3.958%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.790  1.000 
+
+
+*******************************************************************************
+Thu Oct  8 09:24:18 2026
+
+
+FIT:    data read from '3Dcomparison.dat' u 1:(abs($5-$10))
+        format = x:z
+        x range restricted to [0.00000 : 15.0000]
+        #datapoints = 151
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*exp(b*x)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 3.4344754610e+07   0.00e+00  2.41e+03    1.000000e+00   5.000000e-01
+  13 4.1831062535e-01  -1.38e-01  2.41e-06    4.205514e-02   6.146610e-02
+
+After 13 iterations the fit converged.
+final sum of squares of residuals : 0.418311
+rel. change during last iteration : -1.37513e-06
+
+degrees of freedom    (FIT_NDF)                        : 149
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0529854
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00280745
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.0420551        +/- 0.006636     (15.78%)
+b               = 0.0614661        +/- 0.01501      (24.42%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.924  1.000 
+
+
+*******************************************************************************
+Thu Oct  8 09:26:37 2026
+
+
+FIT:    data read from '3Dcomparison.dat' u 1:(abs($5-$10))
+        format = x:z
+        x range restricted to [0.00000 : 23.0000]
+        #datapoints = 231
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*exp(b*x)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 2.4065223243e+02   0.00e+00  1.03e-01    4.205514e-02   6.146610e-02
+ 293 8.2544960743e+00  -2.34e-04  1.03e-04    5.349338e-05   4.975713e-01
+
+After 293 iterations the fit converged.
+final sum of squares of residuals : 8.2545
+rel. change during last iteration : -2.34129e-09
+
+degrees of freedom    (FIT_NDF)                        : 229
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189857
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0360458
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 5.34934e-05      +/- 1.368e-05    (25.58%)
+b               = 0.497571         +/- 0.01153      (2.317%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.999  1.000 

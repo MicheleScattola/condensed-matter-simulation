@@ -1,0 +1,20 @@
+For comparison run
+```bash
+./md.x param* > out*.dat
+``` 
+Then modify initial chain file to chain3D_*.xyz and run
+```bash
+./md.x param* > 3Dout*.dat
+``` 
+where * = [1,2,3,4]
+
+In order to compare different datasets merge two column files into one
+```bash
+paste file1.dat file2.dat > file12.dat
+```
+
+### gnuplot fit
+When fitting, first declare initial variable values:
+```bash
+a = 1.0
+```
