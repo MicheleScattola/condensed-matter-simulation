@@ -50,7 +50,7 @@ void read_parameters(char *filename){
 	fprintf(stderr,"d0 %g\n"      ,d0);
 	fprintf(stderr,"inputxyz %s\n",inputxyz);
 	fprintf(stderr,"trajfile %s\n",trajfile);
-	fprintf(stderr,"trajfile %s\n",recursfile);
+	fprintf(stderr,"recursfile %s\n",recursfile);
 
 	fclose(fin);
 }

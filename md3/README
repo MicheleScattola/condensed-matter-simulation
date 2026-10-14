@@ -1,5 +1,0 @@
-MD dynamics of a spring-mass chain with recursion times calculation
-
-```gnuplot
-p 'recurs1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_1=11.74 meV', 'recurs2.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_2=11.95 meV'
-```

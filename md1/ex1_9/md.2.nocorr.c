@@ -7,7 +7,7 @@
 #define cube(x) ((x)*(x)*(x))
 /* UNITS: meV, ps, Ang -- mass is in units of ~1.602e-26 kg ~= 9.648 amu  */
 
-double KB = 8.617333262E-8; // k_B in [meV/K]
+double KB = 8.617333262E-2; // k_B in [meV/K]
 int N;             //number of atoms
 char *atomtype;    //atomic species (1 char)
 double dt;         //timestep
