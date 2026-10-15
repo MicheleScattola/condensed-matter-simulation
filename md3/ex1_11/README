@@ -1,0 +1,22 @@
+MD dynamics of a spring-mass chain with recursion times calculation
+
+```gnuplot
+p 'recurs1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_1=11.74 meV', 'recurs2.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_2=11.95 meV'
+```
+
+```gnuplot
+a = 1.0
+b = 1.0
+
+fit a*x 'recurs1.dat' u 0:($1/1000) via a
+fit b*x 'recurs2.dat' u 0:($1/1000) via b
+
+p 'recurs1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_1=11.74 meV', 'recurs2.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_2=11.95 meV', a*x w l t 'Fit: 0.842 x', b*x w l t 'Fit: 0.992 x'
+```
+
+$b = 0.99221 $ , $a = 0.842718$ , $E_1 = 11.740818 meV$ , $E_2 = = 11.947426 meV$
+
+### Results
+Note that results are fitted onto a [ns] time-scale.
+Therefore
+$$T = \frac{E_2 - E_1}{k_B \ln{\frac{\bar{\tau}(E_2)}{\bar{\tau}(E_1)}}} = $$

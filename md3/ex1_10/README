@@ -1,7 +1,17 @@
 MD dynamics of a spring-mass chain with recursion times calculation
 
+param1/2 and 1.1/2.1 double in nsteps
+
+```bash
+./md.x param1 > out1.dat && ./md.x param1.1 > out1.1.dat && ./md.x param2 > out2.dat && ./md.x param2.1 > out2.1.dat
+```
 ```gnuplot
 p 'recurs1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_1=11.74 meV', 'recurs2.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_2=11.95 meV'
+p 'recurs1.1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_1=11.74 meV', 'recurs2.1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_2=11.95 meV'
+p 'recurs1.1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_1=11.74 meV', 'recurs2.1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_2=11.95 meV'
+p 'recurs1.1.dat' u 0:($1/1000) w points pt 7 ps 1 t '2 x nstep', 'recurs1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'nstep', 0.7313*x lw 2 t 'Fit 0.7313 x', [0:130] 0.719*x lw 2 t 'Fit 0.7197 x'
+
+p 'recurs1.1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_1=11.74 meV', 'recurs2.1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_2=11.95 meV', [0:205] 0.9245*x lw 2 t 'Fit: 0.9245 x', 0.7313*x lw 2 t 'Fit: 0.7313 x'
 ```
 
 ```gnuplot
@@ -14,9 +24,13 @@ fit b*x 'recurs2.dat' u 0:($1/1000) via b
 p 'recurs1.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_1=11.74 meV', 'recurs2.dat' u 0:($1/1000) w points pt 7 ps 1 t 'E_2=11.95 meV', a*x w l t 'Fit: 0.842 x', b*x w l t 'Fit: 0.992 x'
 ```
 
-$b = 0.99221 $ , $a = 0.842718$ , $E_1 = 11.740818 meV$ , $E_2 = = 11.947426 meV$
+$b = 0.92489 $ , $a = 0.731331 $ , $E_1 = 11.740818 meV$ , $E_2 = = 11.947426 meV$
 
 ### Results
 Note that results are fitted onto a [ns] time-scale.
 Therefore
 $$T = \frac{E_2 - E_1}{k_B \ln{\frac{\bar{\tau}(E_2)}{\bar{\tau}(E_1)}}} = $$
+```gnuplot
+print (11.947426-11.740818)/(0.08617718*log(0.92489/0.731331))
+10.2103531581647
+```
