@@ -1,0 +1,8 @@
+MD simulation of a spring-mass chain surrounded by fluid particles, with periodic boundaries or confining box.
+
+```gnuplot
+gnuplot> p 'out.dat' u 1:5 w l lw 2 t 'no kbox', 'out_PBC.dat' u 1:5 w l lw 2 t 'kbox = 5.0'
+gnuplot> set title 'Box confinement'
+gnuplot> set xlabel 't [ps]'
+gnuplot> set ylabel 'chain lenght [A]'
+```

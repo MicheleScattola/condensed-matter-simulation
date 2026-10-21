@@ -1,0 +1,5 @@
+MD simulation of a spring-mass chain surrounded by fluid particles, with periodic boundaries or confining box.
+
+```gnuplot
+gnuplot> p 'out1.5.dat' u 1:4 w l lw 2 t 'cut=1.5A' ,'out2.0.dat' u 1:4 w l lw 2 t 'cut=2.0A', 'out3.0.dat' u 1:4 w l lw 2 t 'cut=3.0A'
+```
