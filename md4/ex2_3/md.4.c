@@ -4,9 +4,10 @@
 #include <string.h>
 
 #define kB 0.08617718  /*  kB= 1./11.604=0.086 meV/K  */
-#define CUTOFF 3.0
+//#define CUTOFF 3.0
 /* UNITS: meV, ps, Ang -- mass is in units of ~1.602e-26 kg ~= 9.648 amu  */
 
+double CUTOFF = 3.0;
 int N;             //number of atoms
 char *atomtype;    //atomic species (1 char)
 double dt;         //timestep
@@ -61,6 +62,8 @@ void read_parameters(char *filename){
 
 	fclose(fin);
 	halfside=side/2.;
+
+	fprintf(stderr,"\nAll parameters read from file\n");
 }
 
 void readxyz(){
@@ -276,8 +279,14 @@ void printout(){
 int main(int argc, char *argv[])
 {
    // read parameter file
-   if (argc != 2) {fprintf(stderr,"Provide parameter file\n"); exit(1);}
+   if (argc < 2) {fprintf(stderr,"Provide parameter file\n"); exit(1);}
    read_parameters(argv[1]);
+	 printf("argc = %d",argc);
+	 if(argc >=2 && argv[2]){
+		CUTOFF = atof(argv[2]);
+		fprintf(stderr,"Using CUTOFF radius: %.2f\n",CUTOFF);
+	 }
+
 
    // read initial conditions
    readxyz();

@@ -1,5 +1,22 @@
 MD simulation of a spring-mass chain surrounded by fluid particles, with periodic boundaries or confining box.
 
+## Program usage
+```bash
+./md.x paramfile (optional: CUTOFF radius) > outfile
+
+time ./md.x param 1.5 > out1.5.dat && time ./md.x param 2.0 > out2.0.dat && time ./md.x param 3.0 > out3.0.dat
+```
+
+CUTOFF radii can be deduced by choosing the desired potential energy cutoff.
+$$ U(R) = \frac{c}{R^{10}}$$
+$$U(R') = \alpha U(R_0) \text{     with an appropriate fraction  } \alpha \sim 1/100$$
+$$\frac{c}{R'^{10}} = \alpha \frac{c}{R_0^{10}}$$
+which gives a parameter scale that depends on the original chain lenght:
+$$ R' = \left( 1/\alpha\right)^{10} R_0 $$
+The distance between atoms in the chain is of order $R\sim 2 \AA$ which yields $R_{cutoff} \sim 3.17 \AA$
+
+
+## Plotting
 ```gnuplot
-gnuplot> p 'out1.5.dat' u 1:4 w l lw 2 t 'cut=1.5A' ,'out2.0.dat' u 1:4 w l lw 2 t 'cut=2.0A', 'out3.0.dat' u 1:4 w l lw 2 t 'cut=3.0A'
+gnuplot > p 'out1.5.dat' u 1:4 w l lw 2 t 'cut=1.5A' ,'out2.0.dat' u 1:4 w l lw 2 t 'cut=2.0A', 'out3.0.dat' u 1:4 w l lw 2 t 'cut=3.0A'
 ```
