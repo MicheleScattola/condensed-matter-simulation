@@ -1,0 +1,27 @@
+MD simulation of a spring-mass chain surrounded by fluid particles, with periodic boundaries or confining box.
+
+## Program usage
+```bash
+./md.x paramfile (optional: CUTOFF radius) (optional: apply potential correction (1)) > outfile
+```
+
+CUTOFF radii can be deduced by choosing the desired potential energy cutoff.
+$$ U(R) = \frac{c}{R^{10}}$$
+$$U(R') = \alpha U(R_0) \text{     with an appropriate fraction  } \alpha \sim 1/100$$
+$$\frac{c}{R'^{10}} = \alpha \frac{c}{R_0^{10}}$$
+which gives a parameter scale that depends on the original chain lenght:
+$$ R' = \left( 1/\alpha\right)^{10} R_0 $$
+The distance between atoms in the chain is of order $R\sim 2 \AA$ which yields $R_{cutoff} \sim 3.17 \AA$
+
+
+## Plotting
+```gnuplot
+b = 1/-0.0330447
+a = 101.686 
+c = 23.9291 
+set xlabel 't [ps]'
+set ylabel 'T [K]'
+set title 'Thermalization'
+set key top right
+p [0:200] 'out.dat' u 1:6 w l lw 2 t 'T_{m}' , 'out.dat' u 1:7 w l lw 2 t 'T_{w}', a*exp(x/b)+c w l lw 2 t 'Fit exp(-t/30.3)'
+```

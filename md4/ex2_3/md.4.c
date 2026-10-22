@@ -294,7 +294,7 @@ int main(int argc, char *argv[])
 		
 	 }
 	 fprintf(stderr,"Using CUTOFF radius: %.2f\n",CUTOFF);
-	 fprintf(stderr,"Potential shift: %.2f\n",U0);
+	 fprintf(stderr,"Potential shift: %.6f\n",U0);
 
 
    // read initial conditions

@@ -19,14 +19,18 @@ The distance between atoms in the chain is of order $R\sim 2 \AA$ which yields $
 
 ## Plotting
 ```gnuplot
-gnuplot > p 'out1.5.dat' u 1:4 w l lw 2 t 'no cut', '1.5.dat' u 1:4 w l lw 2 t 'cutoff', 'shift1.5.dat' u 1:4 w l lw 2 t 'cutoff + shift'
-gnuplot > p 'out2.0.dat' u 1:4 w l lw 2 t 'no cut', '2.0.dat' u 1:4 w l lw 2 t 'cutoff', 'shift2.0.dat' u 1:4 w l lw 2 t 'cutoff + shift'
-gnuplot > p 'out3.0.dat' u 1:4 w l lw 2 t 'no cut', '3.0.dat' u 1:4 w l lw 2 t 'cutoff', 'shift3.0.dat' u 1:4 w l lw 2 t 'cutoff + shift'
+set title 'Cutoff X.Y A comparison'
+set ylabel 'E_{TOT} [meV]'
+set xlabel 't [ps]'
+set key top right
 
+p 'out1.5.dat' u 1:4 w l lw 2 t 'no cut', '1.5.dat' u 1:4 w l lw 2 t 'cutoff', 'shift1.5.dat' u 1:4 w l lw 2 t 'cutoff + shift'
+p 'out2.0.dat' u 1:4 w l lw 2 t 'no cut', '2.0.dat' u 1:4 w l lw 2 t 'cutoff', 'shift2.0.dat' u 1:4 w l lw 2 t 'cutoff + shift'
+p 'out3.0.dat' u 1:4 w l lw 2 t 'no cut', '3.0.dat' u 1:4 w l lw 2 t 'cutoff', 'shift3.0.dat' u 1:4 w l lw 2 t 'cutoff + shift'
 
-gnuplot > p '1.5.dat' u 1:4 w l lw 2 t 'cut=1.5A' ,'2.0.dat' u 1:4 w l lw 2 t 'cut=2.0A', '3.0.dat' u 1:4 w l lw 2 t 'cut=3.0A'
+p '1.5.dat' u 1:4 w l lw 2 t 'cut=1.5A' ,'2.0.dat' u 1:4 w l lw 2 t 'cut=2.0A', '3.0.dat' u 1:4 w l lw 2 t 'cut=3.0A'
 
-gnuplot > p 'out1.5.dat' u 1:4 w l lw 2 t 'no shift', 'newout1.5.dat' u 1:4 w l lw 2 t 'U(cutoff) = 0'
+p 'out1.5.dat' u 1:4 w l lw 2 t 'no shift', 'newout1.5.dat' u 1:4 w l lw 2 t 'U(cutoff) = 0'
 
-gnuplot > p 'out1.5.dat' u 1:4 w l lw 2 t '1.5A (no shift)', 'newout1.5.dat' u 1:4 w l lw 2 t '1.5A (shifted)', 'out2.0.dat' u 1:4 w l lw 2 t '2.0A (no shift)', 'newout2.0.dat' u 1:4 w l lw 2 t '2.0A (shifted)', 'out3.0.dat' u 1:4 w l lw 2 t '3.0A (no shift)', 'newout3.0.dat' u 1:4 w l lw 2 t '3.0A (shifted)'
+p 'out1.5.dat' u 1:4 w l lw 2 t '1.5A (no shift)', 'newout1.5.dat' u 1:4 w l lw 2 t '1.5A (shifted)', 'out2.0.dat' u 1:4 w l lw 2 t '2.0A (no shift)', 'newout2.0.dat' u 1:4 w l lw 2 t '2.0A (shifted)', 'out3.0.dat' u 1:4 w l lw 2 t '3.0A (no shift)', 'newout3.0.dat' u 1:4 w l lw 2 t '3.0A (shifted)'
 ```

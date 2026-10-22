@@ -317,7 +317,7 @@ int main(int argc, char *argv[])
 	 printf("argc = %d",argc);
 	 if(argc >=2 && argv[2]){
 		CUTOFF = atof(argv[2]);
-		fprintf(stderr,"Using CUTOFF radius: %.2f\n",CUTOFF);
+		fprintf(stderr,"Using CUTOFF radius: %.6f\n",CUTOFF);
 	 }
 
 
