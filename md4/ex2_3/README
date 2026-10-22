@@ -2,9 +2,10 @@ MD simulation of a spring-mass chain surrounded by fluid particles, with periodi
 
 ## Program usage
 ```bash
-./md.x paramfile (optional: CUTOFF radius) > outfile
+./md.x paramfile (optional: CUTOFF radius) (optional: apply potential correction (1)) > outfile
 
-time ./md.x param 1.5 > out1.5.dat && time ./md.x param 2.0 > out2.0.dat && time ./md.x param 3.0 > out3.0.dat
+time ./md.x param > out1.5.dat && time ./md.x param > out2.0.dat && time ./md.x param > out3.0.dat
+time ./md.x param 1.5 0 > 1.5.dat && time ./md.x param 1.5 1 > shift1.5.dat && time ./md.x param 2.0 0 > 2.0.dat && time ./md.x param 2.0 1 > shift2.0.dat && time ./md.x param 3.0 0 > 3.0.dat && time ./md.x param 3.0 1 > shift3.0.dat
 ```
 
 CUTOFF radii can be deduced by choosing the desired potential energy cutoff.
@@ -18,5 +19,14 @@ The distance between atoms in the chain is of order $R\sim 2 \AA$ which yields $
 
 ## Plotting
 ```gnuplot
-gnuplot > p 'out1.5.dat' u 1:4 w l lw 2 t 'cut=1.5A' ,'out2.0.dat' u 1:4 w l lw 2 t 'cut=2.0A', 'out3.0.dat' u 1:4 w l lw 2 t 'cut=3.0A'
+gnuplot > p 'out1.5.dat' u 1:4 w l lw 2 t 'no cut', '1.5.dat' u 1:4 w l lw 2 t 'cutoff', 'shift1.5.dat' u 1:4 w l lw 2 t 'cutoff + shift'
+gnuplot > p 'out2.0.dat' u 1:4 w l lw 2 t 'no cut', '2.0.dat' u 1:4 w l lw 2 t 'cutoff', 'shift2.0.dat' u 1:4 w l lw 2 t 'cutoff + shift'
+gnuplot > p 'out3.0.dat' u 1:4 w l lw 2 t 'no cut', '3.0.dat' u 1:4 w l lw 2 t 'cutoff', 'shift3.0.dat' u 1:4 w l lw 2 t 'cutoff + shift'
+
+
+gnuplot > p '1.5.dat' u 1:4 w l lw 2 t 'cut=1.5A' ,'2.0.dat' u 1:4 w l lw 2 t 'cut=2.0A', '3.0.dat' u 1:4 w l lw 2 t 'cut=3.0A'
+
+gnuplot > p 'out1.5.dat' u 1:4 w l lw 2 t 'no shift', 'newout1.5.dat' u 1:4 w l lw 2 t 'U(cutoff) = 0'
+
+gnuplot > p 'out1.5.dat' u 1:4 w l lw 2 t '1.5A (no shift)', 'newout1.5.dat' u 1:4 w l lw 2 t '1.5A (shifted)', 'out2.0.dat' u 1:4 w l lw 2 t '2.0A (no shift)', 'newout2.0.dat' u 1:4 w l lw 2 t '2.0A (shifted)', 'out3.0.dat' u 1:4 w l lw 2 t '3.0A (no shift)', 'newout3.0.dat' u 1:4 w l lw 2 t '3.0A (shifted)'
 ```

@@ -7,7 +7,8 @@
 //#define CUTOFF 3.0
 /* UNITS: meV, ps, Ang -- mass is in units of ~1.602e-26 kg ~= 9.648 amu  */
 
-double CUTOFF = 3.0;
+double CUTOFF = 100000.0;
+double U0 = 0.0;
 int N;             //number of atoms
 char *atomtype;    //atomic species (1 char)
 double dt;         //timestep
@@ -204,7 +205,7 @@ void calc_energies(){
 		if(d > CUTOFF) continue;
 		d5  = d*d*d*d*d;
 		d10 = d5*d5;
-		epot += c_rep/d10;
+		epot += c_rep/d10-U0;
 	    }
 
 	//box (if no PBC)
@@ -284,8 +285,16 @@ int main(int argc, char *argv[])
 	 printf("argc = %d",argc);
 	 if(argc >=2 && argv[2]){
 		CUTOFF = atof(argv[2]);
-		fprintf(stderr,"Using CUTOFF radius: %.2f\n",CUTOFF);
+		if(argc >=3 && atoi(argv[3])==1){
+			// calculate potential shift
+			double d5 = CUTOFF*CUTOFF*CUTOFF*CUTOFF*CUTOFF;
+			double d10 = d5*d5;
+			U0 = c_rep/d10;
+		}
+		
 	 }
+	 fprintf(stderr,"Using CUTOFF radius: %.2f\n",CUTOFF);
+	 fprintf(stderr,"Potential shift: %.2f\n",U0);
 
 
    // read initial conditions
