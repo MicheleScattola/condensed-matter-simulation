@@ -1,0 +1,13 @@
+nstep		200000
+print		100
+mass		10.0
+timestep	0.001
+harmonic	5.0
+distance	2.0
+initialfile	initialchain3D_large.xyz
+trajfile	/dev/null
+
+side		200.0
+
+temperature 	0.0
+gamma		1.0

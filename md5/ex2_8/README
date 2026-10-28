@@ -1,0 +1,16 @@
+MD simulation of a spring-mass chain with Langevin thermostat.
+
+```gnuplot
+set title 'Temperature decay'
+set xlabel 't [ps]'
+set ylabel 'T [K]'
+set key top right
+a = 70.0
+b = 10
+f(x) = a * exp(-x/b)
+fit f(x) 'out.dat' u 1:6 via a,b
+print(a)
+print(b)
+p [0:50] 'out.dat' u 1:6 w l lw 2 t 'T_{m}', f(x) w l lw 2 t 'Fit: 38.5 exp(-t/10.1)'
+
+```
