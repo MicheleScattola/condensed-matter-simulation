@@ -1,0 +1,36 @@
+GO MODEL
+
+Perform relaxation with T=0 and traj.xyz
+```bash
+./md.x param_relaxed > relaxation.dat
+```
+Now copy only the last trajectory step and save the xyz coordinates
+```bash
+tail -n 58 traj.xyz > tmp.xyz
+touch 1PGB_relaxed.xyz
+awk '{print $1,$2,$3,$4}' tmp.xyz > 1PGB_relaxed.xyz
+rm tmp.xyz
+``` 
+Perform unfolding with T=400 K and traj_unfolding.xyz, and set the native file as 1PGB_relaxed.xyz
+```bash
+./md.x param_unfolded > unfolding.dat
+```
+Now copy only the last trajectory step and save the xyz coordinates
+```bash
+tail -n 58 traj_unfolded.xyz > tmp.xyz
+touch 1PGB_unfolded.xyz
+awk '{print $1,$2,$3,$4}' tmp.xyz > 1PGB_unfolded.xyz
+rm tmp.xyz
+``` 
+Perform refolding at T=10.0K and traj_refolding.xyz. Init file as 1PGB_unfolded.xyz and nativefile as 1PGB_relaxed.xyz
+```bash
+./md.x param_refolded > refolding.dat
+```
+Now copy only the last trajectory step and save the xyz coordinates
+
+```bash
+tail -n 58 traj_refolded.xyz > tmp.xyz
+touch 1PGB_refolded.xyz
+awk '{print $1,$2,$3,$4}' tmp.xyz > 1PGB_refolded.xyz
+rm tmp.xyz
+``` 
