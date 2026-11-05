@@ -1,0 +1,20 @@
+nstep		200000
+print		1000
+mass		10.0
+timestep	0.002
+kspring		100.
+restlength	3.8
+initialfile	1PGB.xyz
+trajfile	traj.xyz
+
+temperature	0.0
+gamma		1.0
+
+nativefile	1PGB.xyz
+c6		1.4e5
+c10		5e7
+d0		6.5
+dmin		3
+cutoff		20.
+
+

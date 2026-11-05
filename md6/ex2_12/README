@@ -1,0 +1,5 @@
+# GO MODEL
+Run the analysis via `./launch.sh` for a 10 run average of unfolding/refolding. The script makes use of `./plots.sh` for instant plotting.
+Run `make clean` to cleanup .dat files.
+
+Run fits via `./fits.sh`.

@@ -1,0 +1,39 @@
+
+
+*******************************************************************************
+Thu Nov  5 16:56:08 2026
+
+
+FIT:    data read from 'average_refolding.dat' u 1:2
+        format = x:z
+        #datapoints = 601
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x)=a*(1-exp(-x/b))+c
+fitted parameters initialized with current variable values
+
+Warning: Initial value of parameter 'c' is zero.
+iter      chisq       delta/lim  lambda   a             b             c            
+   0 1.1746543701e+02   0.00e+00  5.77e-01    1.000000e+00   1.000000e-01   1.000000e-30
+  10 1.6281100654e-01  -3.73e-01  5.77e-11    5.948802e-01   1.483951e+02   1.333229e-01
+
+After 10 iterations the fit converged.
+final sum of squares of residuals : 0.162811
+rel. change during last iteration : -3.72585e-06
+
+degrees of freedom    (FIT_NDF)                        : 598
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0165003
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000272259
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.59488          +/- 0.002735     (0.4597%)
+b               = 148.395          +/- 1.719        (1.158%)
+c               = 0.133323         +/- 0.002969     (2.227%)
+
+correlation matrix of the fit parameters:
+                a      b      c      
+a               1.000 
+b              -0.261  1.000 
+c              -0.833  0.704  1.000 

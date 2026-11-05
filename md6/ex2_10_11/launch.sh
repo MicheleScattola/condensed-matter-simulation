@@ -30,6 +30,7 @@ set yrange [0:1]
 set y2range [0:25]
 
 set ylabel "q"
+set xlabel "t [ps]"
 set ytics nomirror
 set title "Unfolding at 450K"
 unset y2tics
@@ -41,6 +42,7 @@ unset ylabel
 unset ytics
 set y2tics nomirror
 set y2label "dRMSD"
+set xlabel "t [ps]"
 set title "Folding at 10K"
 set key bottom right
 
