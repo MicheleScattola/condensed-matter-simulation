@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export LC_ALL=C
-
 # create relaxed state
 ./md.x param_relaxed | awk '{print $1,$7}' > relaxation.dat
 tail -n 58 traj.xyz > tmp.xyz
