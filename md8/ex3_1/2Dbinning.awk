@@ -22,14 +22,14 @@ END{
     range2=max2-min2; delta2=range2/nbins
     print "min1=",min1,", max1=",max1,", min2=",min2,", max2=",max2 > "/dev/stderr"
     for(i=0;i<=nbins;i++)
-	for(j=0;j<=nbins;j++) p[i][j]="0.0"
+        for(j=0;j<=nbins;j++) p[i,j]="0.0"
     for(i=1;i<=n;i++){
 	bin1=int((v1[i]-min1)/delta1)
 	bin2=int((v2[i]-min2)/delta2)
-	p[bin1][bin2]+=1
+    p[bin1,bin2]+=1
     }
     for(i=0;i<=nbins;i++){
-	for(j=0;j<=nbins;j++) print (i+0.5)*delta1+min1,(j+0.5)*delta2+min2,p[i][j]/(n*delta1*delta2)
+    for(j=0;j<=nbins;j++) print (i+0.5)*delta1+min1,(j+0.5)*delta2+min2,p[i,j]/(n*delta1*delta2)
         print ""
     }
 }
