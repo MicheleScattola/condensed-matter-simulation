@@ -20,6 +20,9 @@ double *x,*y,*z,*Vx,*Vy,*Vz;
 double *xprev,*yprev,*zprev,*Vxprev,*Vyprev,*Vzprev; // to store the old coordinates for Verlet
 double epot,ekin,etot,Tm,Tin;
 double gam; // factor for MC move 1 = kB*T
+double epsilon,four_epsilon,twenty4_epsilon; //LJ interaction: epsilon, 4*epsilon, 24*epsilon
+double sigma,sigma6,sigma12,two_sigma12; //LJ interaction: sigma, sigma^6, sigma^12, 2*sigma^12
+double LJ_cutoff2; // square cutoff for LJ interaction
 char inputxyz[30],trajfile[30];
 FILE *ftraj;
 double vmax,halfvmax,xmax,halfxmax;
@@ -44,6 +47,8 @@ void read_parameters(char *filename){
 	if( fscanf(fin,"%s %lf ", dummy, &side    ) != 2 ) error();
 	if( fscanf(fin,"%s %lf ", dummy, &Tin     ) != 2 ) error();
 	if( fscanf(fin,"%s %lf ", dummy, &gam     ) != 2 ) error();
+	if( fscanf(fin,"%s %lf ", dummy, &epsilon ) != 2 ) error();
+	if( fscanf(fin,"%s %lf ", dummy, &sigma   ) != 2 ) error();
 
 	//printout parameters to check
 	fprintf(stderr,"nsteps %ld\n"    ,nsteps);
@@ -56,6 +61,8 @@ void read_parameters(char *filename){
 	fprintf(stderr,"side %g\n"       ,side);
 	fprintf(stderr,"temperature %g\n",Tin);
 	fprintf(stderr,"gam %g\n"        ,gam);
+	fprintf(stderr,"LJ_epsilon %g\n" ,epsilon);
+	fprintf(stderr,"LJ_sigma %g\n"   ,sigma);
 
 	fclose(fin);
 	halfside=side/2.;
@@ -63,6 +70,14 @@ void read_parameters(char *filename){
 	halfvmax=0.5*vmax;
 	xmax=gam*sqrt(2*kB*Tin/kspring);
 	halfxmax=0.5*xmax;
+
+	// LJ
+	four_epsilon=4.*epsilon;
+	twenty4_epsilon=24.*epsilon;
+	sigma6=pow(sigma,6);
+	sigma12=sigma6*sigma6;
+	two_sigma12=2.*sigma12;
+	LJ_cutoff2=square(3.*sigma);
 
 }
 
@@ -126,8 +141,11 @@ double dist(int i, int j){
 	return sqrt( square(distx(i,j)) + square(disty(i,j)) + square(distz(i,j)) );
 }
 
+static inline double dist2(int i,int j){ return ( square(distx(i,j)) + square(disty(i,j)) + square(distz(i,j)) ); }
+
+
 void calc_energies(){
-	int i;
+	int i,j;
 
 	ekin=0;
 	for(i=0;i<N;i++){ ekin+=( Vx[i]*Vx[i] + Vy[i]*Vy[i] + Vz[i]*Vz[i] ); }
@@ -140,6 +158,17 @@ void calc_energies(){
 	for (i=0;i<N-1;i++)
 		epot += 0.5*kspring*square( dist(i,i+1) - d0 );
 
+	//LJ
+	double d2=0.;
+	double d6=0.;
+	for (i=0;i<N;i++)
+	    for (j=0;j<i;j++){
+				d2=dist2(i,j);
+				if(d2>LJ_cutoff2) continue;
+				d6=d2*d2*d2;
+				epot+=four_epsilon*(sigma12/(d6*d6)-sigma6/d6);
+        }
+	
 	etot=ekin+epot;
 }
 
@@ -190,18 +219,27 @@ void write_traj(){
 	fflush(ftraj);
 }
 
+double gyration(){
+	int i; double xcm=0,ycm=0,zcm=0,res=0;
+	for(i=0;i<N;i++){ xcm+=x[i]; ycm+=y[i]; zcm+=z[i]; }
+	xcm/=N; ycm/=N; zcm/=N;
+	for(i=0;i<N;i++)
+	    res+=( square(x[i]-xcm) + square(y[i]-ycm) + square(z[i]-zcm) );
+
+	return sqrt(res/N);
+}
+
 void printout(){
 	static int once=1;
 	if(once){
 		once=0;
-		printf("#time\tekin\t\tepot\t\tetot\t\tchain_length\ttemperature\ttrials\n");
+		printf("#time\tekin\t\tepot\t\tetot\t\tchain_length\ttemperature\ttrials\tgyration\n");
 	}
 	calc_energies();
-	printf("%ld\t%lf\t%lf\t%lf\t%lf\t%lf\t%d\n",nstep,ekin,epot,etot,dist(0,N-1),Tm,trials );
+	printf("%ld\t%lf\t%lf\t%lf\t%lf\t%lf\t%d\t%lf\n",nstep,ekin,epot,etot,dist(0,N-1),Tm,trials,gyration() );
 	write_traj();
 	fflush(stdout);
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -210,6 +248,10 @@ int main(int argc, char *argv[])
    read_parameters(argv[1]);
 	if (argc > 2) {
 		gam = atof(argv[2]);
+		vmax = gam*sqrt(kB*Tin/mass);
+		halfvmax = 0.5*vmax;
+		xmax = gam*sqrt(2*kB*Tin/kspring);
+		halfxmax = 0.5*xmax;
 		fprintf(stderr,"Using custom gamma = %g\n",gam);
 	}
 

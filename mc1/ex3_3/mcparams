@@ -1,12 +1,14 @@
-nstep		1000
-print		10
+nstep		500000
+print		100
 mass		10.0
 kspring		5.0
-distance	2.0
+distance	1.0
 
 initialfile	initialchain3D_large.xyz
 trajfile	/dev/null
 
 side		200.0
-temperature 	200.0
+temperature 	100.0
 gamma		0.2
+LJ_epsilon	1.0
+LJ_sigma	0.9
