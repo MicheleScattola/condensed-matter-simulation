@@ -5,9 +5,8 @@ set out "multiplot.pdf"
 
 set style line 2 linecolor rgb "red" linewidth 2
 set style line 1 linecolor rgb "navy" linewidth 2
-
-set format y "%.0e"
-set format y2 "%.0e"
+set style line 3 linecolor rgb "blue" linewidth 2 dt 2
+set style line 4 linecolor rgb "orange" linewidth 2 dt 2
 
 set key top right
 
@@ -18,16 +17,19 @@ set ytics nomirror
 set xlabel "time t [ns]"
 set ylabel "gyration radius R_{g} [A]"
 set title "MD convergence"
-
-p "md_full.dat" u (($1)/1000):7 w l ls 1 t "MD"
+set parametric
+set trange [5:35]
+p "md_full.dat" u (($1)/1000):7 w l ls 1 title "MD", \
+  0.1, t w l ls 3 title "transient"
 
 set title "MC convergence"
 
 unset ylabel
 unset ytics
 set xlabel "N_{steps}"
-set format x "%.0e"
-p "mc_full.dat" u 1:8 w l ls 2 t "MC"
+set format x "%.0tx10^{%T}"
+p "mc_full.dat" u 1:8 w l ls 2 t "MC", \
+    0.5e5, t w l ls 4 title "transient"
 
 unset multiplot
 

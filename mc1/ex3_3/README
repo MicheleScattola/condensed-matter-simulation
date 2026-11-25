@@ -1,1 +1,3 @@
-MC simulation of a spring-mass chain.
+# MC simulation of a spring-mass chain.
+The first N steps of system stabilization are skipped when plotting the pdf and Free Energy distribution.
+`multiplot.pdf` shows the convergence of the chosen feature to compare MD and MC with (gyration radius), which gives a rough estimate of how many steps/ns of simulation to skip.

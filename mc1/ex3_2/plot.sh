@@ -11,15 +11,18 @@ set style line 2 linecolor rgb "blue" linewidth 2 dt 2
 set xlabel "Simulation gamma"
 set ylabel "Cumulative trials"
 set y2label "Acceptance rate: N_{steps}/N_{trials}"
-set y2tics
 set title "Stop at: T >= T_{equilibrium}"
 
-set format y "%.0e"
+set format y "%.0tx10^{%T}"
+set format y2 "%.0tx10^{%T}"
 set logscale y
-set key top center
+set logscale y2
+set y2tics nomirror
+set ytics nomirror
+set key top center box opaque
+set xrange [0.08:0.62]
 
 p "data.dat" u 1:2 axes x1y1 w points pointtype 7 pointsize 1.5 linecolor rgb "red" title "Trials", \
-  "data.dat" u 1:3 axes x1y2 w points pointtype 7 pointsize 1.5 linecolor rgb "navy" title "Acceptance rate"
-
+  "data.dat" u 1:3 axes x1y2 w points pointtype 7 pointsize 1.5 linecolor rgb "navy" title "Acceptance rate" 
 set out
 set term pop' | gnuplot
