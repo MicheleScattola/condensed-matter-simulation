@@ -1,0 +1,62 @@
+#set units in eV, Angstrom, ps
+units           metal
+
+# periodic boundaries along all directions
+boundary p p p
+
+# creates a cubic simulation box of side=10, and 1 atom type
+region          mybox block  0 10  0 10  0 10  units box
+create_box      1 mybox
+
+# fills the box with 100 atoms of type 1 with random coordinates (seed=4447)
+create_atoms    1 random 100 4447 mybox
+
+# set the mass of atom type 1 to that of Ne
+mass            1 20.1797
+
+# skin for neighbors list
+neighbor        2.0 bin
+
+# neighbors list update every 100 steps
+neigh_modify    every 10 delay 0 check yes
+
+# lennard-jones interaction with radial cutoff r_c=10
+pair_style      lj/cut 10.0
+
+# coefficient for LJ: epsilon=0.001, sigma=1
+pair_coeff      * * 0.001 1.0
+
+# set the time step
+timestep            0.001
+
+# adding a Langevin thermostat at 300K
+fix LAN all langevin 300 300 0.1 4567
+
+# saving trajectories to file every 100 timesteps
+# dump            1 all atom 100 traj.dump
+
+# print output every 1000 steps
+thermo          1000
+
+# quantities to print
+thermo_style    custom time step temp etotal pe ke press ndanger
+thermo_modify   flush yes
+
+
+# set integrator to velocity-verlet
+run_style verlet
+
+# adding limited integrator to avoid "explosions"
+fix NVE all nve/limit 0.001
+
+# performing a few steps to avert too-close atoms
+run 3000
+
+
+# replacing integrator with standard (not limited)
+unfix NVE
+fix NVE all nve
+
+# perform the simulation
+run 100000 upto
+
