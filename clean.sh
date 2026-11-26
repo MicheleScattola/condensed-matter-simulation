@@ -2,3 +2,4 @@
 
 find . -name '*.dat' -delete
 find . -name '*.x' -delete
+find . -name '*.out' -delete
