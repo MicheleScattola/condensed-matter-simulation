@@ -1,0 +1,8 @@
+a = 0.8427 ns/count
+b = 0.9922 ns/count
+c (2 nstep, E_1) = 0.7957 ns/count
+d (2 nstep, E_2) = 1.0225 ns/count
+E_1 = 11.7408 meV
+E_2 = 11.9474 meV
+T (nstep fits) = 14.6812 K
+T (2 nstep fits) = 9.5590 K

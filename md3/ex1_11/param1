@@ -1,5 +1,5 @@
-nstep		100000000
-print		100
+nstep		200000000
+print		1000
 mass		1.0
 timestep	0.001
 kspring		10.0

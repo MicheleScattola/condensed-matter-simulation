@@ -282,7 +282,6 @@ int main(int argc, char *argv[])
    // read parameter file
    if (argc < 2) {fprintf(stderr,"Provide parameter file\n"); exit(1);}
    read_parameters(argv[1]);
-	 printf("argc = %d",argc);
 	 if(argc >=2 && argv[2]){
 		CUTOFF = atof(argv[2]);
 		if(argc >=3 && atoi(argv[3])==1){
