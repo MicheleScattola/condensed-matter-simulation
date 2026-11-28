@@ -1,7 +1,7 @@
 set term push
 set term pdfcairo enhanced color rounded size 12,6 lw 1.5 font "Arial,28"
 set border lw 1.5 front
-set out "temp.pdf"
+set out "order_parameters.pdf"
 
 set multiplot layout 1,2 margins 0.1, 0.9, 0.15, 0.9 spacing 0, 0
 

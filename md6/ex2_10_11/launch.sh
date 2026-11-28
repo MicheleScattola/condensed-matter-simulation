@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ./md.x param_relaxed > relaxation.dat
+# 58 atoms, last 58 lines are saved as the final config
 tail -n 58 traj.xyz > tmp.xyz
 touch 1PGB_relaxed.xyz
 awk '{print $1,$2,$3,$4}' tmp.xyz > 1PGB_relaxed.xyz

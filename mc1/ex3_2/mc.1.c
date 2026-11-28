@@ -24,6 +24,7 @@ char inputxyz[30],trajfile[30];
 FILE *ftraj;
 double vmax,halfvmax,xmax,halfxmax;
 int trials;
+unsigned int random_seed = 4567;
 
 double square(double val){ return val*val; }
 double cube(double val){ return val*val*val; }
@@ -157,7 +158,7 @@ void gen_trial(){
 void MC_move(){
 	int i; static int once=1;
 	double E0,E1,deltaE,r;
-	if(once){ once=0; srand(4567); }
+	if(once){ once=0; srand(random_seed); }
 
 	for(i=0;i<N;i++){ xprev[i]=x[i]; yprev[i]=y[i]; zprev[i]=z[i]; Vxprev[i]=Vx[i]; Vyprev[i]=Vy[i]; Vzprev[i]=Vz[i]; }
 
@@ -202,9 +203,21 @@ void printout(){
 	fflush(stdout);
 }
 
+int temperature_window_reached(){
+	static double temperatures[5];
+	double average=0.;
+	int i;
+
+	temperatures[(nstep-1)%5]=Tm;
+	if(nstep<5) return 0;
+	for(i=0;i<5;i++) average+=temperatures[i];
+	return fabs(average/5.-100.)<=1.;
+}
+
 
 int main(int argc, char *argv[])
 {
+   int reached=0;
    // read parameter file
    if (argc < 2) {fprintf(stderr,"Provide parameter file\n"); exit(1);}
    read_parameters(argv[1]);
@@ -216,6 +229,7 @@ int main(int argc, char *argv[])
 		halfxmax = 0.5*xmax;
 		fprintf(stderr,"Using custom gamma = %g\n",gam);
 	}
+	if (argc > 3) random_seed = (unsigned int)strtoul(argv[3], NULL, 10);
 
 
    // read initial conditions
@@ -230,13 +244,17 @@ int main(int argc, char *argv[])
 
       MC_move(); // one accepted MC step
 
-      // write trajectory and print some information
-      if ( nstep % print == 0 ) printout();
+	if (temperature_window_reached()) {
+	 printout();
+	 reached=1;
+	 break;
+	}
+	if ( nstep % print == 0 ) printout();
    }
 
    fclose(ftraj);
 
-   return 0;
+	return reached ? 0 : 1;
 }
 
 

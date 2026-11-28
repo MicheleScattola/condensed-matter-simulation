@@ -1,4 +1,4 @@
-nstep		1000000
+nstep		20000000
 print		100
 mass		10.0
 timestep	0.001

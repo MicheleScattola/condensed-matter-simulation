@@ -4,8 +4,8 @@ export LC_NUMERIC=C
 
 rm -f ave*.dat cv.dat h*.dat
 make
-#./md.x parameters.7 4567 9 > out9.dat
-#./md.x parameters.7 4877 11 > out11.dat 
+./md.x parameters.7 4567 9 > out9.dat
+./md.x parameters.7 4877 11 > out11.dat 
 
 # progressive $1 = <E> , $2 = <E^2>
 for i in 9 11; do
@@ -23,5 +23,5 @@ for i in 9 11; do
 done
 
 echo -e "plotting..."
-
-source ./plot.sh
+rm fit.log
+gnuplot plot.gnuplot

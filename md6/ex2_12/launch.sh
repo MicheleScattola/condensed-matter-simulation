@@ -1,6 +1,10 @@
 #!/bin/bash
+LC_NUMERIC=C
 
 # create relaxed state
+rm fit.log
+rm *.dat
+make
 ./md.x param_relaxed | awk '{print $1,$7}' > relaxation.dat
 tail -n 58 traj.xyz > tmp.xyz
 touch 1PGB_relaxed.xyz
@@ -51,4 +55,7 @@ done
 awk '{print $1,$2/10}' unfolding.dat > average_unfolding.dat
 awk '{print $1,$2/10}' refolding.dat > average_refolding.dat
 
-source ./plot.sh
+gnuplot plot.gnuplot
+
+rm refolding*.dat
+rm unfolding*.dat
